@@ -1,0 +1,58 @@
+<mat-card>
+    <div style="text-align: start; font-size: 14px;">
+        <mat-form-field appearance="outline">
+            <!-- <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+            </mat-date-range-input> -->
+            <input matInput [matDatepicker]="picker" placeholder={{searchText}} [(ngModel)]="searchText1">
+            <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <button mat-button matSuffix (click)="dateFormat()">
+                <mat-icon matSuffix>search</mat-icon>
+            </button>
+            <!-- <button mat-button matSuffix (click)="refresh()">
+                <mat-icon matSuffix>refresh</mat-icon>
+            </button> -->
+        </mat-form-field>
+    </div>
+
+    <div id="table" class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col"> Date</th>
+                    <th scope="col">Light Status </th>
+                    <th scope="col">ON Time </th>
+                    <th scope="col">OFF Time </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of dataSource | filter:searchText ; let i = index">
+                <tr>
+                    <td> {{i+1}} </td>
+                    <td> {{data.date | date:"longDate"}} </td>
+                    <td> {{data.lightStatus}} </td>
+                    <td> {{data.onTime | date:"mediumTime"}} </td>
+                    <td> {{data.offTime | date:"mediumTime"}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <!-- <div style="float: left;">
+            <label for="">Total Number Sense : </label> {{totalNo}}
+        </div>
+        <div style="float: right;">
+            <label for="">Total Sensing Hours : </label> {{totalHr}}
+        </div> -->
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+    </div>
+
+    <div>
+        <button id="buttonL" type="submit" mat-raised-button (click)="logOut()">Log out</button>
+    </div>
+
+</mat-card>

@@ -1,0 +1,34 @@
+<div class="login-container">
+    <div class="login-content">
+        <div fxFlex="100" style="margin: 1%;">
+            <mat-card>
+                <!-- <p> {{user | json}} </p> -->
+                <h3>Please Enter The UserID And Password </h3>
+                <hr>
+                <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="10" fxlayoutGap.lt-md="10px">
+
+
+                        <mat-form-field fxFlex>
+                            <mat-icon matPrefix>person_outline</mat-icon>
+                            <input matInput placeholder="User ID" [(ngModel)]="user.userId" name="userId"
+                                type="text" [ngModelOptions]="{standalone: true}" #userId="ngModel" required>
+                            <mat-error *ngIf="userId.errors?.['required']"> User ID is required. </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex>
+                            <mat-icon matPrefix>lock_outline</mat-icon>
+                            <input type="password" autocomplete="false" matInput placeholder="Password"
+                                [(ngModel)]="user.password" name="password" #password="ngModel" required>
+                            <mat-error *ngIf="password.errors?.['required']">Password is required.</mat-error>
+                        </mat-form-field>
+
+                        <div fxFlex>
+                            <button id="buttonL" type="submit" mat-raised-button color="primary">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>
